@@ -27,7 +27,7 @@ void setup() {
 } 
 void draw() { 
   noStroke();
-  //image(bg,0,0);
+  image(bg,0,0);
   if (mousePressed == true) {
     // Draw our line
     stroke(255);
