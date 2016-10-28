@@ -1,8 +1,6 @@
-import processing.net.*;
+// 2A: Shared drawing canvas (Server)
 
-  
-import processing.sound.*;
-SoundFile file;
+import processing.net.*;
 
 Server s, s2, s3;
 Client c, c2, c3;
@@ -31,14 +29,17 @@ void draw() {
   if (mousePressed == true) {
     // Draw our line
     stroke(255);
-    line(pmouseX, pmouseY, mouseX, mouseY); 
-    // Send mouse coords to other person
+    line(pmouseX, pmouseY, mouseX, mouseY);
     s.write(pmouseX + " " + pmouseY + " " + 50 + " " + 50 + "\n");
   }
+  if ((mousePressed==true)&&( mouseX ==data[0])){
+   rect(data[0]-100,data[1]-91,200,267); 
+  }
+  
   sinval = sin(angle);   
-  float fading = sinval*100;
-  map(fading, -1, 1, 0, 400);
-  println(fading);   
+  float fading = sinval;
+  float faded =map(fading, -1, 1, 200, 400);
+  println(faded);   
   angle += 0.1;
 
   // Receive data from client
@@ -50,7 +51,7 @@ void draw() {
     // Draw using received coords
     //stroke(0);
     //fill(0,201,0);
-    tint(255, fading);
+    tint(255, 100);
     image(ghost, data[0], data[1], 200, 267);
   }
 
@@ -62,9 +63,7 @@ void draw() {
     // Draw using received coords
     //stroke(0);
     //fill(255);
-    file = new SoundFile(this, "ghostsound.mp3");
-    file.play();
-    tint(255, fading);
+    tint(255, 100);
     image(ghost2, data2[0], data2[1], 200, 267);
   }
 
@@ -76,7 +75,7 @@ void draw() {
     // Draw using received coords
     //stroke(0);
     //fill(255);
-    tint(255, fading);
+    tint(255, 100);
     image(ghost3, data3[0], data3[1], 200, 267);
   }
 }
