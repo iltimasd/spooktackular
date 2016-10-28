@@ -67,15 +67,49 @@ void draw() {
     image(ghost2, data2[0], data2[1], 200, 267);
   }
 
-  c3 = s3.available();
-  if (c3 != null) {
-    input3 = c3.readString(); 
-    input3 = input3.substring(0, input3.indexOf("\n"));  // Only up to the newline
-    data3 = int(split(input3, ' '));  // Split values into an array
-    // Draw using received coords
-    //stroke(0);
-    //fill(255);
-    tint(255, 100);
-    image(ghost3, data3[0], data3[1], 200, 267);
+  c4 = s4.available();
+  if (c4 != null) {
+    input4 = c4.readString(); 
+    input4 = input4.substring(0, input4.indexOf("\n"));  // Only up to the newline
+    print(input4);
+    if (input4.equals("1")) {
+      float r=random(0, 10);
+      if (r<5) {
+        bats.add(new Bat(0, random(0, height), random(7, 15)));
+      } else {
+        bats.add(new Bat(width, random(0, height), random(-7, -15)));
+      }
+      input4="0";
+    }
+    print(input4);
+  }
+
+  for (int i = bats.size()-1; i >= 0; i--) { 
+    Bat bat =  bats.get(i);
+    bat.fly();
+    bat.display();
+  }
+}
+
+class Bat { 
+  float xpos;
+  float ypos;
+  float xspeed;
+
+  // The Constructor is defined with arguments.
+  Bat( float tempXpos, float tempYpos, float tempXspeed) { 
+    xpos = tempXpos;
+    ypos = tempYpos;
+    xspeed = tempXspeed;
+  }
+
+  void display() {
+    stroke(0);
+    fill(0);
+    image(batty,xpos, ypos, 60, 30);
+  }
+
+  void fly() {
+    xpos = xpos + xspeed;
   }
 }
