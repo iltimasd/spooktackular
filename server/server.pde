@@ -46,9 +46,6 @@ void draw() {
     line(pmouseX, pmouseY, mouseX, mouseY);
     s.write(pmouseX + " " + pmouseY + " " + 50 + " " + 50 + "\n");
   }
-  if ((mousePressed==true)&&( mouseX ==data[0])){
-   rect(data[0]-100,data[1]-91,200,267); 
-  }
   
   sinval = sin(angle);   
   float fading = sinval;
