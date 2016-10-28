@@ -2,6 +2,9 @@
 
 import processing.net.*;
 
+import processing.sound.*;
+SoundFile file;
+
 Server s, s2, s3, s4;
 Client c, c2, c3, c4;
 String input, input2, input3, input4;
@@ -72,6 +75,8 @@ void draw() {
     // Draw using received coords
     //stroke(0);
     //fill(0,201,0);
+    file = new SoundFile(this, "ghostsound.mp3");
+    file.play();
     tint(255, 100);
     image(ghost, data[0], data[1], 200, 267);
   }
@@ -84,6 +89,8 @@ void draw() {
     // Draw using received coords
     //stroke(0);
     //fill(255);
+    file = new SoundFile(this, "ghostsound.mp3");
+    file.play();
     tint(255, 100);
     image(ghost2, data2[0], data2[1], 200, 267);
   }
