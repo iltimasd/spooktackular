@@ -2,13 +2,34 @@
 
 import processing.net.*;
 
-Server s, s2, s3;
-Client c, c2, c3;
-String input, input2, input3;
+Server s, s2, s3, s4;
+Client c, c2, c3, c4;
+String input, input2, input3, input4;
 int data[], data2[], data3[];
 float angle;
 float sinval;
-PImage ghost, ghost2, ghost3, bg;
+PImage ghost, ghost2, ghost3, bg, batty;
+ArrayList<Bat> bats;
+
+
+void setup() { 
+  size(1100, 600);
+  background(204);
+  frameRate(30); // Slow it down a little
+  s = new Server(this, 12345);  // Start a simple server on a port
+  s2 = new Server(this, 12356);  // Start a simple server on a port
+  s3 = new Server(this, 12367);  // Start a simple server on a port
+  s4 = new Server(this, 12348);  // Start a simple server on a port
+
+  bats = new ArrayList<Bat>();
+  bats.add(new Bat(0, 0, 3));
+
+  ghost  = loadImage("ghost01.png");
+  ghost2 = loadImage("ghost02.png");
+  ghost3 = loadImage("ghost03.png");
+  bg     = loadImage("graveyard.png");
+  batty=loadImage("bat.png");
+} 
 
 
 void setup() { 
