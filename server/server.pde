@@ -14,7 +14,7 @@ float sinval;
 PImage ghost, ghost2, ghost3, bg, batty;
 ArrayList<Bat> bats;
 
-
+////////SETUP//////////////////////////
 void setup() { 
   size(1100, 600);
   background(204);
@@ -33,20 +33,10 @@ void setup() {
   bg     = loadImage("graveyard.png");
   batty=loadImage("bat.png");
 } 
+//////////SETUP//////////////
 
 
-void setup() { 
-  size(1100, 600);
-  background(204);
-  frameRate(30); // Slow it down a little
-  s = new Server(this, 12345);  // Start a simple server on a port
-  s2 = new Server(this, 12356);  // Start a simple server on a port
-  s3 = new Server(this, 12367);  // Start a simple server on a port
-  ghost  = loadImage("ghost01.png");
-  ghost2 = loadImage("ghost02.png");
-  ghost3 = loadImage("ghost03.png");
-  bg     = loadImage("graveyard.png");
-} 
+
 void draw() { 
   noStroke();
   image(bg,0,0);
@@ -95,6 +85,20 @@ void draw() {
     image(ghost2, data2[0], data2[1], 200, 267);
   }
 
+c3 = s3.available();
+  if (c3 != null) {
+    input3 = c3.readString(); 
+    input3 = input3.substring(0, input3.indexOf("\n"));  // Only up to the newline
+    data3 = int(split(input3, ' '));  // Split values into an array
+    // Draw using received coords
+    //stroke(0);
+    //fill(255);
+    file = new SoundFile(this, "ghostsound.mp3");
+    file.play();
+    tint(255, 100);
+    image(ghost3, data3[0], data3[1], 200, 267);
+  }
+  
   c4 = s4.available();
   if (c4 != null) {
     input4 = c4.readString(); 
