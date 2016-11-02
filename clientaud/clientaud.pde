@@ -1,4 +1,4 @@
-// 2B: Shared drawing canvas (Client)
+// Audience Client, adding to the scene
 
 import processing.net.*; 
 
@@ -11,12 +11,15 @@ void setup() {
   frameRate(30); // Slow it down a little
   // Connect to the server’s IP address and port­
   c = new Client(this, "127.0.0.1", 12348); // Replace with your server’s IP and port
+
+  textSize(32);
+  textAlign(CENTER);
 } 
 
 void draw() {         
-  background(204);
-
-  // Receive data from server
+  background(100);
+  fill(255,79,10);
+  text("Click for BATS on the stage",width/2,height/2);
 
 }
 
