@@ -1,16 +1,14 @@
-// 2A: Shared drawing canvas (Server)
+// Server with scene
 
 import processing.net.*;
 
 import processing.sound.*;
-SoundFile file;
+SoundFile file, bgmusic;
 
 Server s, s2, s3, s4;
 Client c, c2, c3, c4;
 String input, input2, input3, input4;
 int data[], data2[], data3[];
-float angle;
-float sinval;
 PImage ghost, ghost2, ghost3, bg, batty;
 ArrayList<Bat> bats;
 
@@ -24,6 +22,10 @@ void setup() {
   s3 = new Server(this, 12367);  // Start a simple server on a port
   s4 = new Server(this, 12348);  // Start a simple server on a port
 
+  bgmusic = new SoundFile(this, "bgmusic.mp3");
+  bgmusic.play();
+  
+  
   bats = new ArrayList<Bat>();
   bats.add(new Bat(0, 0, 3));
 
@@ -42,17 +44,11 @@ void draw() {
   image(bg,0,0);
   if (mousePressed == true) {
     // Draw our line
-    stroke(255);
+    stroke(255,69,0);
     line(pmouseX, pmouseY, mouseX, mouseY);
     s.write(pmouseX + " " + pmouseY + " " + 50 + " " + 50 + "\n");
   }
   
-  sinval = sin(angle);   
-  float fading = sinval;
-  float faded =map(fading, -1, 1, 200, 400);
-  println(faded);   
-  angle += 0.1;
-
   // Receive data from client
   c = s.available();
   if (c != null) {
@@ -64,6 +60,7 @@ void draw() {
     //fill(0,201,0);
     file = new SoundFile(this, "ghostsound.mp3");
     file.play();
+    file.amp(0.04);
     tint(255, 100);
     image(ghost, data[0], data[1], 200, 267);
   }
@@ -78,6 +75,7 @@ void draw() {
     //fill(255);
     file = new SoundFile(this, "ghostsound.mp3");
     file.play();
+    file.amp(0.03);
     tint(255, 100);
     image(ghost2, data2[0], data2[1], 200, 267);
   }
@@ -92,6 +90,7 @@ c3 = s3.available();
     //fill(255);
     file = new SoundFile(this, "ghostsound.mp3");
     file.play();
+    file.amp(0.03);
     tint(255, 100);
     image(ghost3, data3[0], data3[1], 200, 267);
   }
@@ -135,6 +134,7 @@ class Bat {
   void display() {
     stroke(0);
     fill(0);
+    tint(255,255);
     image(batty,xpos, ypos, 60, 30);
   }
 
